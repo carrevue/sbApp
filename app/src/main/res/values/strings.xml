@@ -3,12 +3,10 @@
     <string name="title_activity_first">MainActivity</string>
     <string name="title_last_videos">Home</string>
     <string name="title_featured">Explore</string>
-    <string name="title_my_profile">Me</string>
-    <string name="placeholder_desc">Dear Peanut, what the hell is wrong with you?</string>
-    <string name="placeholder_uploader">Marshal</string>
-    <string name="placeholder_title">An Unexpected Invitation</string>
-    <string name="placeholder_logged">Gamerappa</string>
-    <string name="placeholder_joined">Joined 5 months ago</string>
-    <string name="my_favorites">My favorites</string>
-    <string name="title_community">Community</string>
+    <string name="title_my_profile">You</string>
+    <string name="placeholder_title">Upload title</string>
+    <string name="placeholder_desc">Upload description</string>
+    <string name="placeholder_uploader">Author Username</string>
+    <string name="placeholder_logged">Logged In Username</string>
+    <string name="placeholder_joined">Joined sometime ago</string>
 </resources>

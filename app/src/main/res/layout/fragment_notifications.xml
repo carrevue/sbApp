@@ -6,41 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="142dp"
-        android:layout_height="81dp"
-        android:layout_margin="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#808080"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:srcCompat="@drawable/placeholder"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/email2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
-        android:text="@string/placeholder_uploader"
-        android:textColor="@color/gray"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@+id/name2"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/name2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="6dip"
-        android:paddingBottom="2dip"
-        android:text="@string/placeholder_title"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        tools:layout_editor_absoluteX="16dp" />
-
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"
@@ -63,7 +28,7 @@
         android:layout_height="111dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:src="@drawable/chaziz"
+        android:src="@drawable/profiledef"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_notifications" />
 
@@ -87,15 +52,5 @@
         android:text="@string/placeholder_joined"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/my_favorites"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
