@@ -38,7 +38,6 @@ public class API {
                 HashMap<String, String> video = new HashMap<>();
                 video.put("id", id);
                 video.put("title",       upload.getString("title"));
-                video.put("description", upload.getString("description"));
                 video.put("author",      upload.getString("author"));
                 video.put("preview",     BASE_URL + "/dynamic/thumbnails/" + id + ".png");
 

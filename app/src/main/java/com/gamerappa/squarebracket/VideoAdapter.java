@@ -48,7 +48,6 @@ public class VideoAdapter extends BaseAdapter {
 
         holder.title.setText(video.get("title"));
         holder.author.setText(video.get("author"));
-        holder.description.setText(video.get("description"));
 
         Glide.with(activity)
                 .load(video.get("preview"))
@@ -62,13 +61,11 @@ public class VideoAdapter extends BaseAdapter {
     private static class ViewHolder {
         final TextView title;
         final TextView author;
-        final TextView description;
         final ImageView preview;
 
         ViewHolder(View view) {
             title       = view.findViewById(R.id.video_title);
             author      = view.findViewById(R.id.video_author);
-            description = view.findViewById(R.id.video_description);
             preview     = view.findViewById(R.id.video_preview);
         }
     }
