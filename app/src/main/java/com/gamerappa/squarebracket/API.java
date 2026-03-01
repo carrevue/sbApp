@@ -21,8 +21,9 @@ public class API {
         ArrayList<HashMap<String, String>> videosList = new ArrayList<>();
         HttpHandler sh = new HttpHandler();
 
-        Log.d(TAG, "URL itself: " + "https://sb.billyisreal.com/api/v1/get_videos.php?limit=" + limit + "&offset=" + offset);
-        String jsonStr = sh.makeServiceCall("https://sb.billyisreal.com/api/v1/get_videos.php?limit=" + limit + "&offset=" + offset);
+        // NOTE: this will be moved from /v3/ to /data/ soon.
+        Log.d(TAG, "URL itself: " + "https://squarebracket.pw/api/v3/get_uploads?limit=" + limit + "&offset=" + offset);
+        String jsonStr = sh.makeServiceCall("https://squarebracket.pw/api/v3/get_uploads?limit=" + limit + "&offset=" + offset);
         Log.d(TAG, "Response from url: " + jsonStr);
         // TODO: Custom URL setting for other instances
 
@@ -31,17 +32,18 @@ public class API {
                 JSONObject jsonObj = new JSONObject(jsonStr);
 
                 // Getting JSON Array node
-                JSONArray contacts = jsonObj.getJSONArray("videos");
+                JSONArray contacts = jsonObj.getJSONArray("uploads");
 
                 // looping through All Contacts
                 for (int i = 0; i < contacts.length(); i++) {
                     JSONObject c = contacts.getJSONObject(i);
 
-                    String id = c.getString("id");
+                    String id = c.getString("upload_id");
                     String name = c.getString("title");
                     String email = c.getString("description");
-                    JSONObject phone = c.getJSONObject("author");
-                    String mobile = phone.getString("username");
+                    //JSONObject phone = c.getJSONObject("author");
+                    //String mobile = phone.getString("username");
+                    String mobile = c.getString("author");
 
                     HashMap<String, String> video = new HashMap<>();
 
@@ -49,7 +51,7 @@ public class API {
                     video.put("title", name);
                     video.put("author", email);
                     video.put("description", mobile);
-                    video.put("preview", "https://sb.billyisreal.com/assets/thumb/" + id + ".png");
+                    video.put("preview", "https://squarebracket.pw/dynamic/thumbnails/" + id + ".png");
 
 
                     // adding contact to contact list

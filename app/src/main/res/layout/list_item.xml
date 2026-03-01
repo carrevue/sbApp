@@ -33,7 +33,7 @@
                 android:paddingTop="6dip"
                 android:paddingBottom="2dip"
                 android:text="@string/placeholder_title"
-                android:textColor="?attr/colorPrimaryVariant"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
