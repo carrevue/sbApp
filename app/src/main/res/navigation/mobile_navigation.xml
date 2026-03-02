@@ -24,8 +24,8 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
-        android:id="@+id/navigation_community"
-        android:name="com.gamerappa.squarebracket.ui.community.CommunityFragment"
-        android:label="@string/title_my_profile"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_video_detail"
+        android:name="com.gamerappa.squarebracket.ui.video.VideoDetailFragment"
+        android:label="Video"
+        tools:layout="@layout/fragment_video_detail" />
 </navigation>

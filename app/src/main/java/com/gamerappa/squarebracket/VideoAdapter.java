@@ -1,6 +1,7 @@
 package com.gamerappa.squarebracket;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,12 @@ public class VideoAdapter extends BaseAdapter {
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .into(holder.preview);
+
+        convertView.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, VideoPlayerActivity.class);
+            intent.putExtra("video_id", video.get("id"));
+            activity.startActivity(intent);
+        });
 
         return convertView;
     }
