@@ -4,26 +4,35 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="4dp">
 
-    <ImageView
-        android:id="@+id/video_preview"
-        android:layout_width="142dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
-        android:background="#808080"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/placeholder" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="128dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/video_preview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#808080"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/placeholder" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -33,11 +42,10 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:paddingTop="6dp"
             android:paddingBottom="2dp"
             android:text="@string/placeholder_title"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="18sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="14sp"
             android:textStyle="normal" />
 
         <TextView
@@ -45,7 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/placeholder_uploader"
-            android:textColor="@color/gray"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"
             android:textStyle="normal" />
 
     </LinearLayout>
