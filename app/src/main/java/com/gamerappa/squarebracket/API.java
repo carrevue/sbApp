@@ -13,10 +13,11 @@ public class API {
 
     private static final String TAG = API.class.getSimpleName();
     private static final String BASE_URL = "https://squarebracket.pw";
+    private static final String BASE_API = "/api/data/";
 
     public ArrayList<HashMap<String, String>> getLastVideos(int limit, int offset) {
         ArrayList<HashMap<String, String>> videoList = new ArrayList<>();
-        String url = BASE_URL + "/api/v3/get_uploads?limit=" + limit + "&offset=" + offset;
+        String url = BASE_URL + BASE_API + "get_uploads?limit=" + limit + "&offset=" + offset;
 
         Log.d(TAG, "Fetching uploads from: " + url);
 
