@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,9 +52,11 @@ public class VideoAdapter extends BaseAdapter {
         holder.author.setText(video.get("author"));
 
         Glide.with(activity)
+                .asBitmap()
                 .load(video.get("preview"))
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.preview);
 
         convertView.setOnClickListener(v -> {

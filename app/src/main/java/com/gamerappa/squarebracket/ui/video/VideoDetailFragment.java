@@ -1,6 +1,7 @@
 package com.gamerappa.squarebracket.ui.video;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,17 @@ import androidx.fragment.app.Fragment;
 import com.gamerappa.squarebracket.R;
 
 public class VideoDetailFragment extends Fragment {
+
+    private String videoId;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            videoId = getArguments().getString("video_id");
+            Log.d("VideoDetailFragment", "Received ID: " + videoId);
+        }
+    }
 
     @Nullable
     @Override
@@ -29,7 +41,7 @@ public class VideoDetailFragment extends Fragment {
         TextView description = view.findViewById(R.id.video_detail_description);
 
         // temporary data for now, this should fetch from the api
-        title.setText("Placeholder Title");
+        title.setText("Upload " + videoId);
         author.setText("Author");
         description.setText("This is a placeholder description.");
     }

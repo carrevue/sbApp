@@ -2,66 +2,74 @@ package com.gamerappa.squarebracket;
 
 import android.util.Log;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
-/**
- * Created by Ravi Tamada on 01/09/16.
- * www.androidhive.info
- */
 public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
+    private static final int CONNECT_TIMEOUT_MS = 10_000;
+    private static final int READ_TIMEOUT_MS    = 15_000;
+    private static final int BUFFER_SIZE        = 8_192;
 
-    public HttpHandler() {
-    }
+    // ── GET ──────────────────────────────────────────────────────────────────
 
     public String makeServiceCall(String reqUrl) {
-        String response = null;
-        try {
-            URL url = new URL(reqUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            // read the response
-            InputStream in = new BufferedInputStream(conn.getInputStream());
-            response = convertStreamToString(in);
-        } catch (MalformedURLException e) {
-            Log.e(TAG, "MalformedURLException: " + e.getMessage());
-        } catch (ProtocolException e) {
-            Log.e(TAG, "ProtocolException: " + e.getMessage());
-        } catch (IOException e) {
-            Log.e(TAG, "IOException: " + e.getMessage());
-        } catch (Exception e) {
-            Log.e(TAG, "Exception: " + e.getMessage());
-        }
-        return response;
+        return makeServiceCall(reqUrl, "GET", null);
     }
 
-    private String convertStreamToString(InputStream is) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-
-        String line;
+    // ── Core (GET or POST) ───────────────────────────────────────────────────
+    public String makeServiceCall(String reqUrl, String method, byte[] body) {
+        HttpURLConnection conn = null;
         try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append('\n');
+            URL url = new URL(reqUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod(method);
+            conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
+            conn.setReadTimeout(READ_TIMEOUT_MS);
+            conn.setRequestProperty("Accept-Charset", "UTF-8");
+
+            if (body != null && (method.equals("POST") || method.equals("PUT"))) {
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                conn.setFixedLengthStreamingMode(body.length);
+                conn.getOutputStream().write(body);
             }
+
+            int statusCode = conn.getResponseCode();
+            if (statusCode < 200 || statusCode >= 300) {
+                Log.e(TAG, "HTTP error " + statusCode + " for " + reqUrl);
+                return null;                          // caller decides how to handle
+            }
+
+            return readStream(conn.getInputStream());
+
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "makeServiceCall failed: " + e.getMessage());
+            return null;
         } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            if (conn != null) conn.disconnect();      // always release
         }
+    }
+
+    // ── Stream → String ──────────────────────────────────────────────────────
+
+    private String readStream(InputStream is) throws IOException {
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")), BUFFER_SIZE);
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append('\n');
+        }
+        // trim trailing newline added by the loop
+        if (sb.length() > 0) sb.setLength(sb.length() - 1);
         return sb.toString();
     }
 }
